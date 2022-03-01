@@ -1,3 +1,10 @@
+$( document ).ready( readyNow );
+
+function readyNow() {
+
+}
+
+
 const employees = [
   {
     name: 'Atticus',
@@ -31,6 +38,51 @@ const employees = [
   }
 ];
 
+function employeeBonus(array){
+  
+  let newEmployee =[]
+  let bonusPercentage = 0
+  
+for (let i = 0; i < array.length; i++) {
+  if(array[i].reviewRating <= 2){
+    bonusPercentage = 0;
+  } else if(array[i].reviewRating === 3) {
+    bonusPercentage = 4;
+  } else if(array[i].reviewRating === 4) {
+    bonusPercentage = 6;
+  } else if(array[i].reviewRating === 5) {
+    bonusPercentage = 10;
+  }
+
+  if(array[i].employeeNumber.length === 4) {
+    bonusPercentage = bonusPercentage + 5;
+  }
+
+  if(array[i].annualSalary > 65000) {
+    bonusPercentage - 1;
+  }
+  
+  if(bonusPercentage > 13){
+    bonusPercentage = 13;
+  } else if(bonusPercentage < 0){
+    bonusPercentage = 0;
+    }
+
+    newEmployee.push({
+      name: array[i].name, 
+      bonusPercentage: bonusPercentage,
+      totalBonus: Math.round(array[i].annualSalary * (bonusPercentage / 100)),
+      totalCompensation: parseFloat((array[i].annualSalary)) + parseFloat((Math.round(array[i].annualSalary * (bonusPercentage / 100))))
+    })
+  }
+  console.log(newEmployee);
+  
+
+  $("#bonus").append ("<div>" + msg + "</div>");
+}
+
+
+
 // YOU SHOULD NOT NEED TO CHANGE ANYTHING ABOVE THIS POINT
 
 // This problem is massive! Break the problem down, take small steps, and test as you go.
@@ -39,4 +91,8 @@ const employees = [
 // This is not a race. Everyone on your team should understand what is happening.
 // Ask questions when you don't.
 
+
+
+
 console.log( employees );
+employeeBonus(employees);
